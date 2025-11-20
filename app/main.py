@@ -13,8 +13,11 @@ app.add_middleware(
 	allow_credentials = True,
 	allow_methods = ["*"],
 	allow_headers = ["*"],
-
 )
+
+@app.get("/wakeup")
+def wakeup():
+    return {"status": "awake"}
 
 @app.get("/markets")
 def get_markets(
@@ -36,7 +39,3 @@ def get_markets(
 	except Exception as e:
 		# Keep details out of the response; log in real system
 		raise HTTPException(status_code = 502, detail = "Upstream API error")
-
-@app.get("/wakeup")
-def wakeup():
-    return {"status": "awake"}
