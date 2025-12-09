@@ -10,9 +10,7 @@ def fetch_markets(
 	sparkline: bool = False, 
 ): 
 	url = f"{COINGECKO_BASE_URL}/coins/markets"
-
 	headers = {"x-cg-api-key": COINGECKO_API_KEY}
-
 	params = {
 		"vs_currency": vs_currency, 
 		"order": order, 
@@ -24,13 +22,17 @@ def fetch_markets(
 	resp.raise_for_status()		# will throw if CoinGecko returns error
 	return resp.json()
 
-def fetch_market_chart(id, vs_currency, days):
+def fetch_market_chart(
+	id: str, 
+	vs_currency: str, 
+	days: str
+):
     url = f"{COINGECKO_BASE_URL}/coins/{id}/market_chart"
     params = {
         "vs_currency": vs_currency,
-        "days": days
+        "days": days,
     }
 
-    response = requests.get(url, params=params, headers=headers, timeout=10)
-    response.raise_for_status()
-    return response.json()
+    resp = requests.get(url, params=params, headers=headers, timeout=10)
+    resp.raise_for_status()
+    return resp.json()

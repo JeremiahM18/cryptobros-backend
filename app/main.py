@@ -27,7 +27,7 @@ def get_market_chart(id: str,
         data = fetch_market_chart(id, vs_currency, days)
         return data
      except Exception as e:
-        print("ERROR FETCHING MARKET CHART:", e)  # <-- ADD THIS
+        print("ERROR FETCHING MARKET CHART:", e)
         raise HTTPException(status_code=502, detail="Upstream API error")
 
 @app.get("/markets")
