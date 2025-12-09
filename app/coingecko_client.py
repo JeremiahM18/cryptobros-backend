@@ -23,3 +23,17 @@ def fetch_markets(
 	resp = requests.get(url, headers = headers, params = params, timeout = 10)
 	resp.raise_for_status()		# will throw if CoinGecko returns error
 	return resp.json()
+
+def fetch_market_chart(id, vs_currency, days):
+    url = f"{COINGECKO_BASE_URL}/coins/{id}/market_chart"
+    params = {
+        "vs_currency": vs_currency,
+        "days": days
+    }
+    headers = {
+        "x-cg-api-key": COINGECKO_API_KEY
+    }
+
+    response = requests.get(url, params=params, headers=headers, timeout=10)
+    response.raise_for_status()
+    return response.json()

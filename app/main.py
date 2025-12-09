@@ -19,6 +19,16 @@ app.add_middleware(
 def wakeup():
     return {"status": "awake"}
 
+@app.get("/market_chart/{id}")
+def get_market_chart(id: str,
+                     vs_currency: str = "usd",
+                     days: str = "1"):
+    try:
+        data = fetch_market_chart(id, vs_currency, days)
+        return data
+    except Exception:
+        raise HTTPException(status_code=502, detail="Upstream API error")
+
 @app.get("/markets")
 def get_markets(
 	vs_currency: str = Query("usd"),
