@@ -2,7 +2,7 @@
 from fastapi import FastAPI, HTTPException, Query
 from fastapi.middleware.cors import CORSMiddleware
 
-from .coingecko_client import fetch_markets
+from .coingecko_client import fetch_markets, fetch_market_chart
 
 app = FastAPI(title = "CryptoBros Secure Backend")
 
@@ -26,7 +26,8 @@ def get_market_chart(id: str,
     try:
         data = fetch_market_chart(id, vs_currency, days)
         return data
-    except Exception:
+     except Exception as e:
+        print("ERROR FETCHING MARKET CHART:", e)  # <-- ADD THIS
         raise HTTPException(status_code=502, detail="Upstream API error")
 
 @app.get("/markets")
