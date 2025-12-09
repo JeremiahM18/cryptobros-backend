@@ -28,6 +28,9 @@ def fetch_market_chart(
 	days: str
 ):
     url = f"{COINGECKO_BASE_URL}/coins/{id}/market_chart"
+
+    headers = {"x-cg-api-key": COINGECKO_API_KEY}
+    
     params = {
         "vs_currency": vs_currency,
         "days": days,

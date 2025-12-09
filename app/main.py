@@ -36,7 +36,8 @@ def get_markets(
 	order: str = Query("market_cap_desc"),
 	per_page: int = Query(50, ge = 1, le = 250),
 	page: int = Query(1, ge = 1),
-	sparkline: bool = Query(False),):
+	sparkline: bool = Query(False),
+    ):
     try:
         data = fetch_markets(
             vs_currency = vs_currency,
@@ -48,4 +49,4 @@ def get_markets(
         return data
     except Exception as e:
     # Keep details out of the response; log in real system
-    raise HTTPException(status_code = 502, detail = "Upstream API error")
+        raise HTTPException(status_code = 502, detail = "Upstream API error")
