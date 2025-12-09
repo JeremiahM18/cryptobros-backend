@@ -30,9 +30,6 @@ def fetch_market_chart(id, vs_currency, days):
         "vs_currency": vs_currency,
         "days": days
     }
-    headers = {
-        "x-cg-api-key": COINGECKO_API_KEY
-    }
 
     response = requests.get(url, params=params, headers=headers, timeout=10)
     response.raise_for_status()
